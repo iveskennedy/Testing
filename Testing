@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Atlantic</title>
+  <style>
+    /* Add styles to center the content and set the page title and input field colors */
+    body {
+      text-align: center;
+    }
+    h1 {
+      color: navy;
+    }
+    input {
+      width: 27%;
+      color: navy;
+    }
+    textarea {
+      margin-top: 50px;
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Atlantic Connoisseur</h1>
+  <form>
+    <input placeholder="Enter your thoughts or questions here..." id="question-input">
+    <button onclick="generateResponse()">Ask</button>
+  </form>
+  <textarea id="response" placeholder="Your answer will appear here..."></textarea>
+</body>
+<script>
+  // Import the GPT-3 API client
+  const openai = require('openai');
+
+  // Set the API key for your OpenAI account
+  openai.apiKey = "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";
+
+  // Define a function that uses the GPT-3 API to generate a response to a given question
+  async function generateResponse() {
+    // Get the question from the input field
+    const question = document.getElementById("question-input").value;
+
+    // Use the GPT-3 API to generate a response to the question
+    const response = await openai.completions.create({
+      prompt: question,
+      model: "text-davinci-002",
+      max_tokens: 1024
+    });
+
+    // Set the text of the response text area to the generated response
+    document.getElementById("response
